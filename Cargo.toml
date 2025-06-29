@@ -1,0 +1,11 @@
+[package]
+name = "gi"
+version = "0.1.0"
+description = "Terminal substitution for notepad++"
+authors = ["goverclock"]
+edition = "2024"
+
+[dependencies]
+color-eyre = "0.6.3"
+crossterm = "0.28.1"
+ratatui = "0.29.0"
