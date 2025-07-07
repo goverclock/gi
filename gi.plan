@@ -1,0 +1,9 @@
+- [x] parse cmd args into file paths
+
+- [ ] open and view a log file
+    - [ ] line numbers
+    - [ ] navigate lines using hjkl
+    - [ ] navigate view with C-e, C-y
+    - [ ] open and view a folder
+
+- [ ] basic seperate search window
