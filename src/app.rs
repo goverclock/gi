@@ -1,5 +1,5 @@
-use color_eyre::Result;
-use crossterm::event::{self, Event};
+use color_eyre::{Result, eyre::Ok};
+use crossterm::event::{self, Event, KeyCode};
 use ratatui::{
     DefaultTerminal,
     layout::{Constraint, Layout},
@@ -11,6 +11,7 @@ use crate::log_view::LogView;
 
 pub struct App {
     log_view: LogView,
+    // TODO: focus dispatcher
 }
 
 impl App {
@@ -21,11 +22,14 @@ impl App {
         }
     }
 
-    pub fn run(self, terminal: &mut DefaultTerminal) -> Result<()> {
+    pub fn run(mut self, terminal: &mut DefaultTerminal) -> Result<()> {
         loop {
             terminal.draw(|frame| frame.render_widget(&self, frame.area()))?;
-            if matches!(event::read()?, Event::Key(_)) {
-                break Ok(());
+            if let Event::Key(key) = event::read()? {
+                if key.code == KeyCode::Char('q') {
+                    break Ok(());
+                }
+                self.log_view.handle_events(key)?;
             }
         }
     }
